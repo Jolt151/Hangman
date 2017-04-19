@@ -16,47 +16,54 @@ public class HangmanMain {
             "ladder","effort","tradition","police","quantity","association","volume","income","month","competition","night","replacement","queen","recommendation",
             "complaint","basket","moment","signature","database","problem","newspaper","establishment","emphasis","appointment","impression","cabinet","independence",
 "suggestion" };
-        boolean gameOver = false;
-        boolean gameWon = false;
+        int playAgain = 1;
         
-        Hangman game = new Hangman(nouns[(int) (Math.random() * 51)]);
-        System.out.println("The word is " + game.getTheWord().length() + " characters long.");
-        char c;
-        while (!gameOver){
-            
-            do 
-            {
-                System.out.print("Guess a letter: ");
-                c = userInput.next().charAt(0);
-            }
-            while (!(c > 66 && c < 91) && !(c > 96 && c < 123)  );
-
-            String cString = String.valueOf(c);
-            cString = cString.toUpperCase();
-            c = cString.charAt(0);
-
-            game.guess(c);
-            
-            if (game.getIncorrectGuesses() == 5)
-            {
-                gameOver = true;
-                gameWon = false;
-            }
-            if (game.display().equals(game.getTheWord()))
-            {
-                gameOver = true;
-                gameWon = true;
-            }
-        }
-        if (gameWon)
+        while (playAgain > 0)
         {
-            System.out.println("Congratulations! You won!");
-        }
-        else 
-        {
-            System.out.println("Sorry, you lost. The word was " + game.getTheWord() +".");
-        }
-        
+            boolean gameOver = false;
+            boolean gameWon = false;
+
+            Hangman game = new Hangman(nouns[(int) (Math.random() * 51)]);
+            System.out.println("The word is " + game.getTheWord().length() + " characters long.");
+            char c;
+            while (!gameOver){
+
+                do 
+                {
+                    System.out.print("Guess a letter: ");
+                    c = userInput.next().charAt(0);
+                }
+                while (!(c > 66 && c < 91) && !(c > 96 && c < 123)  );
+
+                String cString = String.valueOf(c);
+                cString = cString.toUpperCase();
+                c = cString.charAt(0);
+
+                game.guess(c);
+
+                if (game.getIncorrectGuesses() == 5)
+                {
+                    gameOver = true;
+                    gameWon = false;
+                }
+                if (game.display().equals(game.getTheWord()))
+                {
+                    gameOver = true;
+                    gameWon = true;
+                }
+            }
+            if (gameWon)
+            {
+                System.out.println("Congratulations! You won!");
+            }
+            else 
+            {
+                System.out.println("Sorry, you lost. The word was " + game.getTheWord() +".");
+            }
+            
+            System.out.println("Would you like to play again? 1: Yes 0: No");
+            playAgain = userInput.nextInt();
+        }         
     }
     
 }
