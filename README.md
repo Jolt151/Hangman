@@ -4,26 +4,28 @@ simple hangman for java
 Difficulties: getting only character from scanner http://stackoverflow.com/questions/13942701/take-a-char-input-from-the-scanner
 
 Only accepting character inputs:
-
+```java
         do
         {
             System.out.print("Guess a letter: ");
             c = userInput.next().charAt(0);
         }
         while (!(c > 66 && c < 91) && !(c > 96 && c < 123)  );
-
+```
 
 Had to convert the character to uppercase to make it easier to deal with for the rest of the program. Could not use string in the first place because i needed to accept only a char from the user.
+```java
         String cString = String.valueOf('c');
         cString = cString.toUpperCase();
         c = cString.charAt(0);
-
+```
 
 contains  method always returned false because a String will never equal a char. Solution: convert the char myChar to a String called myCharString
-String myCharString = String.valueOf(myChar);
+`String myCharString = String.valueOf(myChar);`
 
 
 How do we determine if the player got all the letters? Originally this was the code in display: 
+```java
     private void display()
     {
         for (Character ch : theWord.toCharArray())
@@ -38,7 +40,7 @@ How do we determine if the player got all the letters? Originally this was the c
         }
         System.out.println();
     }
-
+```
 
  One solution is to have display return a String, and then compare that string with the original after every while loop in the main function. ( and make display() public)
 
